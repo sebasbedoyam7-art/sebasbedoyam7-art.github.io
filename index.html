@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Astrum — Inteligencia aplicada a procesos empresariales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --dark:#10162a;--dark2:#1a2340;
+  --text:#d7dae2;--text2:#8890a4;--text3:#c8ccd4;
+  --light-bg:#eef0f4;--white:#ffffff;
+  --body-text:#47516e;--border:#e2e4ea;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Public Sans',system-ui,sans-serif;background:var(--white);color:var(--dark)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:76px;background:var(--dark)}
+.nav-logo{display:flex;align-items:center;gap:14px}
+.nav-logo svg{height:34px;width:auto}
+.nav-tag{font:600 8px/1 'Public Sans',sans-serif;letter-spacing:.18em;color:var(--text2);border-left:1px solid rgba(255,255,255,.2);padding-left:14px;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{font:500 13px/1 'Public Sans',sans-serif;color:var(--text);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-ctas{display:flex;align-items:center;gap:10px}
+.btn-outline-sm{font:600 12.5px 'Public Sans',sans-serif;color:var(--white);border:1px solid rgba(255,255,255,.35);padding:9px 16px;border-radius:2px;text-decoration:none;transition:all .2s}
+.btn-outline-sm:hover{border-color:var(--white);background:rgba(255,255,255,.08)}
+.btn-solid-sm{font:600 12.5px 'Public Sans',sans-serif;color:var(--dark);background:var(--white);padding:9px 16px;border-radius:2px;text-decoration:none;transition:opacity .2s}
+.btn-solid-sm:hover{opacity:.88}
+
+/* HERO */
+.hero{background:var(--dark);color:var(--white);padding:100px 56px 120px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;right:-120px;bottom:-40px;width:480px;height:480px;opacity:.08;z-index:0;pointer-events:none}
+.hero-bg svg{width:100%;height:100%}
+.hero-inner{max-width:760px;position:relative;z-index:1}
+.hero-tag{font:600 12px 'Public Sans',sans-serif;letter-spacing:.14em;color:var(--text2);text-transform:uppercase;margin-bottom:22px}
+.hero h1{font:700 56px/1.12 'Public Sans',sans-serif;margin:0 0 26px;letter-spacing:-.01em}
+.hero p{font:400 18px/1.6 'Public Sans',sans-serif;color:var(--text3);max-width:600px;margin:0 0 38px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{font:600 14px 'Public Sans',sans-serif;color:var(--dark);background:var(--white);padding:15px 28px;border-radius:2px;text-decoration:none;transition:opacity .2s;display:inline-block}
+.btn-primary:hover{opacity:.88}
+.btn-secondary{font:600 14px 'Public Sans',sans-serif;color:var(--white);border:1px solid rgba(255,255,255,.3);padding:15px 28px;border-radius:2px;text-decoration:none;transition:all .2s;display:inline-block}
+.btn-secondary:hover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.06)}
+
+/* SECTIONS */
+section{padding:96px 56px}
+
+/* QUÉ HACEMOS */
+#que-hacemos{background:var(--white)}
+.section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px}
+.section-header h2{font:700 32px/1.2 'Public Sans',sans-serif;color:var(--dark);margin:0;max-width:520px}
+.section-header p{font:400 15px/1.6 'Public Sans',sans-serif;color:var(--body-text);max-width:420px;margin:0}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.card{border:1px solid var(--border);border-radius:4px;padding:36px 28px;transition:border-color .2s}
+.card:hover{border-color:#b0b8cc}
+.card-num{font:700 13px ui-monospace,Menlo,monospace;color:var(--text2);margin-bottom:20px}
+.card h3{font:700 19px 'Public Sans',sans-serif;color:var(--dark);margin:0 0 12px}
+.card p{font:400 14.5px/1.6 'Public Sans',sans-serif;color:var(--body-text);margin:0}
+
+/* MISIÓN */
+#mision{background:var(--light-bg);padding:96px 56px}
+.mision-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.mision-label{font:600 11px 'Public Sans',sans-serif;letter-spacing:.14em;color:var(--text2);text-transform:uppercase;margin-bottom:14px}
+.mision-text{font:400 22px/1.55 'Newsreader',serif;font-style:italic;color:var(--dark);margin:0}
+
+/* EQUIPO */
+#equipo{background:var(--white)}
+#equipo h2{font:700 32px 'Public Sans',sans-serif;color:var(--dark);margin:0 0 44px}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.team-member{text-align:center}
+.team-photo{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;background:var(--light-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.team-photo img{width:100%;height:100%;object-fit:cover}
+.team-photo-ph{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;background:var(--light-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font:700 28px 'Public Sans',sans-serif;color:var(--text2)}
+.team-name{font:600 14px 'Public Sans',sans-serif;color:var(--dark);margin-bottom:4px}
+.team-role{font:400 12.5px 'Public Sans',sans-serif;color:var(--body-text)}
+
+/* PRECIOS */
+#precios{background:var(--white);border-top:1px solid var(--border)}
+#precios h2{font:700 32px 'Public Sans',sans-serif;color:var(--dark);margin:0 0 44px}
+.price-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.price-card{border:1px solid var(--border);border-radius:4px;padding:32px;display:flex;flex-direction:column;gap:12px}
+.price-card.featured{border:2px solid var(--dark)}
+.price-card-name{font:600 14px 'Public Sans',sans-serif;color:var(--dark)}
+.price-card-price{font:700 30px 'Public Sans',sans-serif;color:var(--dark)}
+.price-card-price span{font:400 14px 'Public Sans',sans-serif;color:var(--body-text)}
+.price-card p{font:400 13.5px/1.6 'Public Sans',sans-serif;color:var(--body-text);margin:0}
+.price-card-badge{display:inline-block;font:600 11px 'Public Sans',sans-serif;letter-spacing:.08em;color:var(--dark);background:var(--light-bg);padding:4px 10px;border-radius:2px;text-transform:uppercase;margin-bottom:4px}
+.price-card ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.price-card ul li{font:400 13.5px 'Public Sans',sans-serif;color:var(--body-text);display:flex;align-items:flex-start;gap:8px}
+.price-card ul li::before{content:'→';color:var(--dark);font-weight:600;flex-shrink:0}
+.price-cta{margin-top:auto;padding:12px 20px;font:600 13px 'Public Sans',sans-serif;text-align:center;border-radius:2px;cursor:pointer;transition:all .2s;text-decoration:none;display:block}
+.price-cta-outline{color:var(--dark);border:1px solid var(--border)}
+.price-cta-outline:hover{border-color:var(--dark)}
+.price-cta-solid{color:var(--white);background:var(--dark)}
+.price-cta-solid:hover{opacity:.85}
+
+/* CONTACTO */
+#contacto{background:var(--dark);color:var(--white);padding:80px 56px 0}
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;padding-bottom:60px}
+.contacto-left h2{font:700 32px/1.2 'Public Sans',sans-serif;color:var(--white);margin:0 0 14px}
+.contacto-left p{font:400 15px/1.6 'Public Sans',sans-serif;color:var(--text2);margin:0 0 32px;max-width:380px}
+.contact-info{display:flex;flex-direction:column;gap:10px}
+.contact-info a{font:400 13.5px 'Public Sans',sans-serif;color:var(--text);text-decoration:none;transition:color .2s}
+.contact-info a:hover{color:var(--white)}
+/* FORM */
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-field{display:flex;flex-direction:column;gap:6px}
+.form-field label{font:600 11px 'Public Sans',sans-serif;letter-spacing:.1em;color:var(--text2);text-transform:uppercase}
+.form-field input,.form-field textarea,.form-field select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:2px;padding:11px 14px;font:400 13.5px 'Public Sans',sans-serif;color:var(--white);outline:none;transition:border-color .2s;-webkit-appearance:none}
+.form-field input::placeholder,.form-field textarea::placeholder{color:var(--text2)}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{border-color:rgba(255,255,255,.5)}
+.form-field textarea{resize:vertical;min-height:110px;line-height:1.5}
+.form-field select option{background:var(--dark);color:var(--white)}
+.btn-submit{padding:14px 28px;font:600 14px 'Public Sans',sans-serif;color:var(--dark);background:var(--white);border:none;border-radius:2px;cursor:pointer;transition:opacity .2s;align-self:flex-start}
+.btn-submit:hover{opacity:.88}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed}
+.form-msg{font:400 13px 'Public Sans',sans-serif;padding:10px 14px;border-radius:2px;display:none}
+.form-msg.ok{background:rgba(5,150,105,.15);color:#34d399;border:1px solid rgba(5,150,105,.3)}
+.form-msg.err{background:rgba(220,38,38,.12);color:#fca5a5;border:1px solid rgba(220,38,38,.3)}
+
+/* FOOTER */
+.footer-bar{border-top:1px solid rgba(255,255,255,.12);padding:44px 0 24px}
+.footer-cols{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px;margin-bottom:44px}
+.footer-brand p{font:400 13.5px/1.6 'Public Sans',sans-serif;color:var(--text2);max-width:280px;margin:10px 0 0}
+.footer-col-title{font:600 12px 'Public Sans',sans-serif;color:var(--text2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
+.footer-links{display:flex;flex-direction:column;gap:8px}
+.footer-links a{font:400 13.5px 'Public Sans',sans-serif;color:var(--text);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{font:400 12px 'Public Sans',sans-serif;color:var(--text2);padding-top:22px;border-top:1px solid rgba(255,255,255,.08)}
+
+/* MOBILE NAV */
+.nav-mobile-btn{display:none;background:none;border:none;color:var(--white);cursor:pointer;padding:8px}
+.nav-mobile-menu{display:none}
+
+@media(max-width:900px){
+  nav{padding:0 24px}
+  .nav-links,.nav-ctas{display:none}
+  .nav-mobile-btn{display:flex}
+  .nav-mobile-menu.open{display:flex;flex-direction:column;position:fixed;top:76px;left:0;right:0;background:var(--dark);padding:20px 24px;gap:16px;z-index:99;border-top:1px solid rgba(255,255,255,.1)}
+  .nav-mobile-menu a{font:500 15px 'Public Sans',sans-serif;color:var(--text);text-decoration:none;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .hero{padding:72px 24px 80px}
+  .hero h1{font-size:36px}
+  section{padding:64px 24px}
+  .section-header{flex-direction:column;gap:16px;align-items:flex-start}
+  .cards-3{grid-template-columns:1fr}
+  .mision-grid{grid-template-columns:1fr;gap:40px}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .price-cards{grid-template-columns:1fr}
+  #contacto{padding:64px 24px 0}
+  .contacto-grid{grid-template-columns:1fr;gap:48px}
+  .form-row{grid-template-columns:1fr}
+  .footer-cols{grid-template-columns:1fr}
+  .footer-bar{padding:40px 0 24px}
+}
+@media(max-width:500px){
+  .hero h1{font-size:28px}
+  .hero-btns{flex-direction:column}
+  .btn-primary,.btn-secondary{text-align:center}
+  .team-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- A logo mark -->
+      <g>
+        <polygon points="20,4 33,36 26,36 20,20 14,36 7,36" fill="white"/>
+        <polygon points="12,28 28,28 26,32 14,32" fill="#10162a"/>
+        <!-- Star cutout -->
+        <polygon points="20,10 21.5,15 26.5,15 22.5,18 24,23 20,20 16,23 17.5,18 13.5,15 18.5,15" fill="#10162a"/>
+      </g>
+      <!-- ASTRUM text -->
+      <text x="38" y="27" font-family="'Public Sans', sans-serif" font-size="15" font-weight="700" fill="white" letter-spacing="2">ASTRUM</text>
+    </svg>
+    <span class="nav-tag">Agencia de IA</span>
+  </div>
+  <div class="nav-links">
+    <a href="#que-hacemos">Qué hacemos</a>
+    <a href="#mision">Misión y visión</a>
+    <a href="#equipo">Equipo</a>
+    <a href="#precios">Precios</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <div class="nav-ctas">
+    <a href="https://sebasbedoyam7-art.github.io/iadiagnostic/#consultor" class="btn-outline-sm" target="_blank">Acceso consultores</a>
+    <a href="https://sebasbedoyam7-art.github.io/iadiagnostic/" class="btn-solid-sm" target="_blank">Portal clientes</a>
+  </div>
+  <button class="nav-mobile-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill="white"/><rect y="10" width="22" height="2" rx="1" fill="white"/><rect y="16" width="22" height="2" rx="1" fill="white"/></svg>
+  </button>
+  <div class="nav-mobile-menu" id="mobile-menu">
+    <a href="#que-hacemos" onclick="closeMobileMenu()">Qué hacemos</a>
+    <a href="#mision" onclick="closeMobileMenu()">Misión y visión</a>
+    <a href="#equipo" onclick="closeMobileMenu()">Equipo</a>
+    <a href="#precios" onclick="closeMobileMenu()">Precios</a>
+    <a href="#contacto" onclick="closeMobileMenu()">Contacto</a>
+    <a href="https://sebasbedoyam7-art.github.io/iadiagnostic/" class="btn-solid-sm" style="text-align:center;margin-top:8px" target="_blank">Portal clientes</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="200,20 360,380 40,380" fill="white" opacity=".9"/>
+      <polygon points="200,80 240,200 160,200" fill="#10162a" opacity="1"/>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-tag">Consultoría en inteligencia artificial</div>
+    <h1>Inteligencia aplicada<br>a procesos empresariales.</h1>
+    <p>Auditamos cómo opera tu empresa y diseñamos dónde y cómo implementar IA, para que tus equipos dejen de perder tiempo en tareas repetitivas y se enfoquen en lo que realmente importa.</p>
+    <div class="hero-btns">
+      <a href="https://sebasbedoyam7-art.github.io/iadiagnostic/" class="btn-primary" target="_blank">Solicitar diagnóstico</a>
+      <a href="#que-hacemos" class="btn-secondary">Cómo trabajamos</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ HACEMOS -->
+<section id="que-hacemos">
+  <div class="section-header">
+    <h2>Qué hacemos</h2>
+    <p>Un proceso de tres etapas que va del diagnóstico a la implementación, siempre junto a tu equipo.</p>
+  </div>
+  <div class="cards-3">
+    <div class="card">
+      <div class="card-num">01</div>
+      <h3>Auditoría de procesos</h3>
+      <p>Analizamos a fondo cómo funciona tu empresa: flujos de trabajo, herramientas y cuellos de botella.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">02</div>
+      <h3>Diagnóstico de oportunidades</h3>
+      <p>Identificamos qué procesos pueden potenciarse con IA y dónde conviene esperar.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">03</div>
+      <h3>Implementación acompañada</h3>
+      <p>Diseñamos e integramos las soluciones junto a tu equipo, con seguimiento de resultados.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MISIÓN / VISIÓN -->
+<section id="mision" style="background:var(--light-bg)">
+  <div class="mision-grid">
+    <div>
+      <div class="mision-label">Misión</div>
+      <p class="mision-text">Potenciar el trabajo de las empresas mediante inteligencia artificial aplicada, optimizando procesos, reduciendo tareas repetitivas y permitiendo que los equipos se enfoquen en actividades de mayor valor.</p>
+    </div>
+    <div>
+      <div class="mision-label">Visión</div>
+      <p class="mision-text">Ser una marca referente en inteligencia aplicada a empresas, impulsando organizaciones más eficientes, estratégicas y humanas, donde la tecnología acompañe a las personas y mejore su forma de trabajar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section id="equipo">
+  <h2>Equipo</h2>
+  <div class="team-grid">
+    <div class="team-member">
+      <div class="team-photo-ph">S</div>
+      <div class="team-name">Sebastián Bedoya</div>
+      <div class="team-role">Fundador · Consultor IA</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-ph">·</div>
+      <div class="team-name">[Nombre]</div>
+      <div class="team-role">[Rol]</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-ph">·</div>
+      <div class="team-name">[Nombre]</div>
+      <div class="team-role">[Rol]</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-ph">·</div>
+      <div class="team-name">[Nombre]</div>
+      <div class="team-role">[Rol]</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section id="precios">
+  <h2>Precios</h2>
+  <div class="price-cards">
+    <div class="price-card">
+      <div class="price-card-name">Diagnóstico</div>
+      <div class="price-card-price">$297 <span>pago único</span></div>
+      <p>Auditoría completa de procesos y reporte de oportunidades de IA con hoja de ruta priorizada.</p>
+      <ul>
+        <li>Entrevista de 60 min con tu equipo</li>
+        <li>Análisis de procesos clave</li>
+        <li>Reporte de oportunidades IA</li>
+        <li>Presentación de resultados</li>
+      </ul>
+      <a href="#contacto" class="price-cta price-cta-outline">Solicitar diagnóstico</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-card-badge">Más popular</div>
+      <div class="price-card-name">Implementación</div>
+      <div class="price-card-price">Desde $1,200 <span>por proyecto</span></div>
+      <p>Diseño e integración de las soluciones identificadas en el diagnóstico, con entregables concretos.</p>
+      <ul>
+        <li>Todo lo de Diagnóstico</li>
+        <li>Diseño de soluciones IA</li>
+        <li>Integración con tus herramientas</li>
+        <li>Capacitación del equipo</li>
+        <li>Soporte post-implementación 30 días</li>
+      </ul>
+      <a href="#contacto" class="price-cta price-cta-solid">Empezar ahora</a>
+    </div>
+    <div class="price-card">
+      <div class="price-card-name">Acompañamiento</div>
+      <div class="price-card-price">$490 <span>/ mes</span></div>
+      <p>Seguimiento continuo, ajustes y nuevas oportunidades de automatización a medida que crece tu empresa.</p>
+      <ul>
+        <li>Revisión mensual de resultados</li>
+        <li>Optimización continua</li>
+        <li>Soporte prioritario</li>
+        <li>Nuevas oportunidades de IA</li>
+      </ul>
+      <a href="#contacto" class="price-cta price-cta-outline">Consultar</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contacto-grid">
+    <div class="contacto-left">
+      <h2>Hablemos de tu empresa</h2>
+      <p>Cuéntanos en qué etapa está tu negocio y qué procesos quieres mejorar. Te respondemos en menos de 24 horas.</p>
+      <div class="contact-info">
+        <a href="mailto:sebasbedoyam7@gmail.com">sebasbedoyam7@gmail.com</a>
+        <a href="https://wa.me/59170000000" target="_blank">WhatsApp →</a>
+        <span style="font:400 13.5px 'Public Sans',sans-serif;color:var(--text2)">Bolivia · LATAM</span>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" id="contact-form" onsubmit="sendContact(event)">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Nombre</label>
+            <input type="text" id="cf_nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-field">
+            <label>Empresa</label>
+            <input type="text" id="cf_empresa" placeholder="Nombre de tu empresa">
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" id="cf_email" placeholder="correo@empresa.com" required>
+        </div>
+        <div class="form-field">
+          <label>¿Qué necesitas?</label>
+          <select id="cf_tipo">
+            <option value="">Seleccionar...</option>
+            <option value="diagnostico">Quiero un diagnóstico</option>
+            <option value="implementacion">Implementación de IA</option>
+            <option value="acompanamiento">Acompañamiento mensual</option>
+            <option value="consulta">Solo tengo una consulta</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Mensaje</label>
+          <textarea id="cf_mensaje" placeholder="Cuéntanos brevemente sobre tu empresa y qué procesos quieres mejorar..." required></textarea>
+        </div>
+        <div class="form-msg" id="form-msg"></div>
+        <button type="submit" class="btn-submit" id="btn-submit">Enviar mensaje</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-bar">
+    <div class="footer-cols">
+      <div class="footer-brand">
+        <svg viewBox="0 0 120 32" fill="none" height="28" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="16,3 27,29 21,29 16,16 11,29 5,29" fill="white"/>
+          <polygon points="9.5,22.5 22.5,22.5 21,26 11,26" fill="#10162a"/>
+          <polygon points="16,8 17.2,12 21,12 18,14.2 19.2,18 16,16 12.8,18 14,14.2 11,12 14.8,12" fill="#10162a"/>
+          <text x="32" y="22" font-family="'Public Sans', sans-serif" font-size="13" font-weight="700" fill="white" letter-spacing="2">ASTRUM</text>
+        </svg>
+        <p>Agencia de inteligencia artificial aplicada a procesos empresariales.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Contacto</div>
+        <div class="footer-links">
+          <a href="mailto:sebasbedoyam7@gmail.com">sebasbedoyam7@gmail.com</a>
+          <a href="https://wa.me/59170000000">WhatsApp</a>
+          <span style="color:var(--text2);font:400 13.5px 'Public Sans',sans-serif">Bolivia · LATAM</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Enlaces</div>
+        <div class="footer-links">
+          <a href="https://sebasbedoyam7-art.github.io/iadiagnostic/" target="_blank">Portal clientes</a>
+          <a href="https://sebasbedoyam7-art.github.io/iadiagnostic/" target="_blank">Acceso consultores</a>
+          <a href="#contacto">Aviso de privacidad</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copy">© 2026 Astrum. Todos los derechos reservados.</div>
+  </div>
+</section>
+
+<script>
+// EmailJS
+(function(){
+  emailjs.init({ publicKey: 'SLAVvDh-aDomMebrV' });
+})();
+
+async function sendContact(e) {
+  e.preventDefault();
+  var btn = document.getElementById('btn-submit');
+  var msg = document.getElementById('form-msg');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+  msg.style.display = 'none';
+
+  var params = {
+    from_name: document.getElementById('cf_nombre').value,
+    empresa: document.getElementById('cf_empresa').value || '—',
+    reply_to: document.getElementById('cf_email').value,
+    tipo: document.getElementById('cf_tipo').value || 'General',
+    message: document.getElementById('cf_mensaje').value
+  };
+
+  try {
+    await emailjs.send('service_sebasmail', 'template_9syfhvp', params);
+    msg.textContent = '¡Mensaje enviado! Te respondo en menos de 24 horas.';
+    msg.className = 'form-msg ok';
+    msg.style.display = 'block';
+    document.getElementById('contact-form').reset();
+  } catch(err) {
+    msg.textContent = 'Error al enviar. Escríbenos directamente a sebasbedoyam7@gmail.com';
+    msg.className = 'form-msg err';
+    msg.style.display = 'block';
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Enviar mensaje';
+}
+
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+// Close menu on outside click
+document.addEventListener('click', function(e) {
+  var menu = document.getElementById('mobile-menu');
+  var btn = document.querySelector('.nav-mobile-btn');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>
